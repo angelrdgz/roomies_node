@@ -21,4 +21,18 @@ Route.get('/', () => {
 })
 
 Route.get('users', 'UserController.index')
-Route.resource('tasks', 'TaskController')
+
+
+
+Route.group(() => {
+
+	Route.post('auth/login', 'AuthController.login')
+    Route.post('auth/logout', 'AuthController.logout')  
+
+  
+}).prefix('api/v1')
+
+
+Route.group(() => {
+  	Route.resource('tasks', 'TaskController')
+}).prefix('api/v1').middleware('auth')
